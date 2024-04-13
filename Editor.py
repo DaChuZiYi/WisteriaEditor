@@ -10,7 +10,7 @@ from ttkbootstrap.scrolled import ScrolledText #滚动文本框
 from ttkbootstrap.constants import *
 import os
 
-# 程序所在目录
+# 程序所在目录 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
 root = ttk.Window(
