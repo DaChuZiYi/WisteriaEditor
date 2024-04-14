@@ -13,7 +13,7 @@ import yaml
 import requests
 from bs4 import BeautifulSoup
 import subprocess
-
+import time
 # 程序所在目录
 current_directory = os.path.dirname(os.path.abspath(__file__))
 current_name = "WisteriaEditor"
@@ -28,7 +28,7 @@ def load_yaml(file_path):
 
 # 加载配置
 config_data = load_yaml(os.path.join(current_directory, "Data\\config.yaml"))
-print(config_data)
+
 # 自动更新
 if config_data["autoupdate"]:
     url = "https://dachuziyi.github.io/update"
@@ -53,15 +53,14 @@ if config_data["autoupdate"]:
             print(f"发现新版本 {version}，当前版本为 {config_data['version']}")
             # 下载新版本
             if input("是否现在更新?(Y/n)") != "n":
-                params = [current_directory,version]
-                result = subprocess.run([f"{current_directory}\\Update\\update.exe"] + params, capture_output=True, text=True)
-                if result.returncode == 0:
-                    print("成了")
-                    print("stdout:", result.stdout)
-                    print("stderr:", result.stderr)
-                else:
-                    print("失败:", result.returncode)
-
+                print("正在启动更新程序,本程序将关闭")
+                time.sleep(5)
+                update_exe_path = f"{current_directory}\\Update\\update.exe"
+                new_window_flags = subprocess.CREATE_NEW_CONSOLE  # 启动新窗口标志（Windows）
+                subprocess.Popen([update_exe_path], creationflags=new_window_flags)
+        else:
+            print(f"{term} 已是最新版本")
+            break
 
 
 root = ttk.Window(

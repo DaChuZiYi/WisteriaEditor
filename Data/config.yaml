@@ -1,5 +1,7 @@
 # 绝对绝对不要更改!!!!!
-version: 0.0.0
+version: 0.0.2
 
 # 自动更新
 autoupdate: true
+
+
